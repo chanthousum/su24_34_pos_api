@@ -33,6 +33,8 @@ services:
       KC_DB_PASSWORD: Password123@
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: Password123@
+      KC_PROXY: edge
+      KC_HOSTNAME_STRICT: false
     ports:
       - "8080:8080"
 
