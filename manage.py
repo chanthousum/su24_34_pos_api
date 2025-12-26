@@ -3,7 +3,6 @@
 import os
 import sys
 
-
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'su24_34_pos_api.settings')

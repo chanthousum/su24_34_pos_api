@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    ports:
+      - "8090:8090"
+    container_name: su24_34_pop_api
+    command: bash -c "python manage.py migrate && gunicorn su24_34_pos_api.wsgi:application --bind 0.0.0.0:8090"
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app
+      - static_volume:/usr/src/app/staticfiles
+      - media_volume:/usr/src/app/media
+    depends_on:
+      - db
+    restart: always
+  db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
